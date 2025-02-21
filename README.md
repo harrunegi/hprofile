@@ -1,4 +1,5 @@
 # Prerequisites
+Test Git Integration
 #####
 - JDK 11
 - Maven 3
