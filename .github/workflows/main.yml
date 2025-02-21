@@ -4,5 +4,6 @@ jobs:
   Testing:
     runs-on: ubuntu-latest
     steps:
-      - name: Testing workflow
+      - name: Git checkout
+        uses: actions/checkout@v4
         run: echo "Work flow is getting created"
