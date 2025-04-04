@@ -35,6 +35,7 @@ jobs:
           -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
           -Dsonar.sources=$GITHUB_WORKSPACE
   BUILD_AND_PUBLISH:
+    needs: Testing
     runs-on: ubuntu-latest
     steps:
       - name: Code checkout
@@ -42,9 +43,9 @@ jobs:
 
       - name: Update application.properties file
         run:
-          sed -i "s/^jdbc.username.*$/jdbc.username\=${{ secrets.RDS_USER }}/" src\main\resources\application.properties
-          sed -i "s/^jdbc.password.*$/jdbc.password\=${{ secrets.RDS_PASS }}/" src\main\resources\application.properties
-          sed -i "s/db01/${{ secrets.RDS_ENDPOINT }}/" src\main\resources\application.properties
+          sed -i "s/^jdbc.username.*$/jdbc.username\=${{ secrets.RDS_USER }}/" src/main/resources/application.properties
+          sed -i "s/^jdbc.password.*$/jdbc.password\=${{ secrets.RDS_PASS }}/" src/main/resources/application.properties
+          sed -i "s/db01/${{ secrets.RDS_ENDPOINT }}/" src/main/resources/application.properties
       - name: upload image to ECR
         uses: appleboy/docker-ecr-action@master
         with:
